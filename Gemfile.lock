@@ -9,9 +9,13 @@ GEM
     rake (10.4.2)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES
   bundler (~> 1.9)
   clocker!
   rake (~> 10.0)
+
+BUNDLED WITH
+   1.10.5

@@ -12,7 +12,7 @@ class Clocker
   def clock
     @start = Time.now
     unless @options[:messages_on].nil?
-      puts "began: #{@start}"
+      puts "start: #{@start}"
     end
   
     begin
@@ -26,9 +26,15 @@ class Clocker
   def stop
     @stop = Time.now
     unless @options[:messages_on].nil?
-      puts "\nstopped: #{@stop}"
+      puts "\nended: #{@stop}"
     end
-    duration = ((@stop - @start) * 1000).to_i
-    puts "\n#{duration} ms elapsed"
+    ms = ((@stop - @start) * 1000).to_i
+    if ms > 1000
+      secs = ms / 1000
+      ms = ms % 1000
+      return { :secs => secs, :ms => ms }
+    else
+      return { :secs => 0, :ms => ms }
+    end
   end
 end

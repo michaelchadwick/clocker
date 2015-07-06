@@ -29,12 +29,21 @@ class Clocker
       puts "\nended: #{@stop}"
     end
     ms = ((@stop - @start) * 1000).to_i
-    if ms > 1000
+    
+    if ms > 60000
+      mins = ms / 60000
+      ms = ms - (60000 * mins)
+      if ms > 1000
+        secs = ms / 1000
+        ms = ms % 1000
+      end
+      return { :mins => mins, :secs => secs, :ms => ms }
+    elsif ms > 1000
       secs = ms / 1000
       ms = ms % 1000
-      return { :secs => secs, :ms => ms }
+      return { :mins => 0, :secs => secs, :ms => ms }
     else
-      return { :secs => 0, :ms => ms }
+      return { :mins => 0, :secs => 0, :ms => ms }
     end
   end
 end

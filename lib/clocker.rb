@@ -6,12 +6,12 @@
 
 class Clocker
   def initialize(options = {})
-    @options = options
+    self.options = options
   end
 
   def clock
     @start = Time.now
-    unless @options[:messages_on].nil?
+    unless options[:show_messages].nil?
       puts "start: #{@start}"
     end
   
@@ -25,8 +25,8 @@ class Clocker
   
   def stop
     @stop = Time.now
-    unless @options[:messages_on].nil?
-      puts "\nended: #{@stop}"
+    unless options[:show_messages].nil?
+      puts "ended: #{@stop}"
     end
     ms = ((@stop - @start) * 1000).to_i
     
@@ -37,13 +37,15 @@ class Clocker
         secs = ms / 1000
         ms = ms % 1000
       end
-      return { :mins => mins, :secs => secs, :ms => ms }
+      
+      { mins: mins, secs: secs, ms: ms }
     elsif ms > 1000
       secs = ms / 1000
       ms = ms % 1000
-      return { :mins => 0, :secs => secs, :ms => ms }
+      
+      { mins: 0, secs: secs, ms: ms }
     else
-      return { :mins => 0, :secs => 0, :ms => ms }
+      { mins: 0, secs: 0, ms: ms }
     end
   end
 end

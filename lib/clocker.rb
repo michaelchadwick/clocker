@@ -11,27 +11,31 @@ class Clocker
     self.options = options
   end
 
-  def clock
+  def clock(&block)
     @start = Time.now
-    unless options[:show_messages].nil?
-      puts "start: #{@start}"
+
+    if options[:show_messages]
+      puts "\nstart: #{@start}"
     end
-  
+
     begin
-      yield
+      block.call
     rescue StandardError => e
       puts e.message
     end
-    stop
+
+    return stop
   end
-  
+
   def stop
     @stop = Time.now
-    unless options[:show_messages].nil?
-      puts "ended: #{@stop}"
+
+    if options[:show_messages]
+      puts "\nended: #{@stop}"
     end
+
     ms = ((@stop - @start) * 1000).to_i
-    
+
     if ms > 60000
       mins = ms / 60000
       ms = ms - (60000 * mins)
@@ -39,15 +43,15 @@ class Clocker
         secs = ms / 1000
         ms = ms % 1000
       end
-      
-      { mins: mins, secs: secs, ms: ms }
+
+      return { mins: mins, secs: secs, ms: ms }
     elsif ms > 1000
       secs = ms / 1000
       ms = ms % 1000
-      
-      { mins: 0, secs: secs, ms: ms }
+
+      return { mins: 0, secs: secs, ms: ms }
     else
-      { mins: 0, secs: 0, ms: ms }
+      return { mins: 0, secs: 0, ms: ms }
     end
   end
 end

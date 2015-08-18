@@ -5,6 +5,8 @@
 # time between the two params
 
 class Clocker
+  attr_accessor :options
+
   def initialize(options = {})
     self.options = options
   end

@@ -1,8 +1,5 @@
+# lib/clocker.rb
 # Clocker
-
-# Allows you to run a process for a time and get stats on how long it took
-# If you give it ms bounds on init, it will just run a timer for a random 
-# time between the two params
 
 class Clocker
   attr_accessor :options

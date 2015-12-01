@@ -18,7 +18,7 @@ class Clocker
     begin
       block.call
     rescue StandardError => e
-      puts e.message
+      puts "ERROR: invalid command or block"
     end
 
     return stop

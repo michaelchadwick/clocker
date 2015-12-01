@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors         = ['Michael Chadwick']
   spec.email           = ['mike@codana.me']
   spec.homepage        = 'http://rubygems.org/gems/clocker'
-  spec.summary         = 'Calculate how long a block of code takes to run'
+  spec.summary         = 'Calculate how long a command or block of code takes to run'
   spec.description     = 'Give Clocker some code to process, and it will run it and display how long it took to finish.'
 
   spec.files           = `git ls-files`.split("\n")

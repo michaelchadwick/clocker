@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-
 require_relative '../lib/clocker'
 require_relative '../lib/clocker/version'
 
@@ -13,18 +12,19 @@ def parse_options
   }
 
   optparse = OptionParser.new do |opts|
-    opts.banner = "usage: #{BINARY_NAME} [command|block]"
+    opts.banner = "Calculate how long a command or block of code takes to run\n"
+    opts.banner += "usage: #{BINARY_NAME} COMMAND|BLOCK\n"
 
     opts.on('-m', '--message', 'Show start and ended messages') do |m|
       options[:show_messages] = m
     end
 
     opts.on('-v', '--version', 'Display version number and exit') do
-      puts "#{BINARY_NAME} #{Clocker::VERSION}"
+      puts "#{Clocker::VERSION}"
       exit
     end
 
-    opts.on('-h', '--help', 'Display this screen and exit') do
+    opts.on('-h', '-?', '--help', 'Display this screen and exit') do
       puts opts
       exit
     end
@@ -38,10 +38,9 @@ end
 def print_error(error)
   case error
   when OptionParser::InvalidOption
-    puts "#{BINARY_NAME}: illegal option #{error.args.join(' ')}"
+    puts "#{BINARY_NAME} ERROR: illegal option #{error.args.join(' ')}"
   else
-    puts "An unexpected error occurred while running #{BINARY_NAME}:"
-    puts "  #{error}\n"
+    puts "#{BINARY_NAME} ERROR: #{error}"
   end
 end
 
@@ -49,12 +48,13 @@ begin
   options = parse_options
 
   if (ARGV.count > 0)
+    command = ARGV.join(" ")
     c = Clocker.new(options)
-    t = c.clock { eval(ARGV[0]) }
+    t = c.clock { eval(command) }
     puts
     puts "Clocked at #{t[:mins]} mins, #{t[:secs]} secs, and #{t[:ms]} ms"
   else
-    puts "#{BINARY_NAME} error: missing command or block"
+    puts "#{BINARY_NAME} ERROR: missing command or block"
   end
 rescue => error
   print_error(error)

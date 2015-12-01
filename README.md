@@ -1,9 +1,12 @@
 # Clocker
-Quick way to find out how long that command or block of code takes to run.
+
+[![Gem Version](https://badge.fury.io/rb/clocker.svg)](http://badge.fury.io/rb/clocker)
+
+A simple RubyGem that gauges how long that Ruby command or block of code takes to run.
 
 ## Usage
 ### Command Line
-Simply run `clocker` followed by a command or block in double quotes. Add an `-m` before the command or block to print out start and end times.
+Simply run `clocker` followed by a command or block of code. Add an `-m` before the command or block to print out start and end times.
 
 Ex. 1
 ```
@@ -31,7 +34,7 @@ ended: 2015-08-18 16:16:49 -0700
 Clocked at 0 mins, 2 secs, and 12 ms
 ```
 
-### As Gem Library
+### Gem Library
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -73,7 +76,7 @@ c1c1c1
 ```ruby
 >> c2 = Clocker.new(show_messages: true)
 >> duration = c2.clock do
->>  3.times { purint 'c2'; sleep(1) }
+>>  3.times { print 'c2'; sleep(1) }
 >> end
 >> puts duration
 
@@ -82,3 +85,11 @@ c2c2c2
 ended: 2015-08-18 16:07:20 -0700
 {:mins=>0, :secs=>3, :ms=>14}
 ```
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/michaelchadwick/clocker.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

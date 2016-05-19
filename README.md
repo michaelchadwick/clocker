@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/clocker.svg)](http://badge.fury.io/rb/clocker)
 
-A simple RubyGem that gauges how long that Ruby command or block of code takes to run.
+A simple RubyGem that reports how long a specific Ruby command or block of code takes to run.
 
 ## Usage
 ### Command Line
